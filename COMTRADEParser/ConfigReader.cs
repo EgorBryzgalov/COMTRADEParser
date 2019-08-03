@@ -13,6 +13,8 @@ namespace COMTRADEParser
 
         public int NumberOfAnalogs { get; set; }
 
+        public int NumberOfDigitals { get; set; }
+
         public ConfigReader()
         {
 
@@ -32,16 +34,25 @@ namespace COMTRADEParser
             }
 
             //Кол-во каналов, кол-во аналоговых каналов, кол-во цифровых каналов
+            #region парсинг второй строки
             string[] second = lines[1].Split(',');
             NumberOfChannels = int.Parse(second[0]);
-            StringBuilder Analog = new StringBuilder();
+            StringBuilder StrBuilder = new StringBuilder();
             foreach (char c in second[1])
             {
                 if (c != 'A')
-                    Analog.Append(c);
+                    StrBuilder.Append(c);
             }
-            NumberOfAnalogs = int.Parse(Analog.ToString());
-            
+            NumberOfAnalogs = int.Parse(StrBuilder.ToString());
+            StrBuilder.Clear();
+            foreach (char c in second[2])
+            {
+                if (c != 'D')
+                    StrBuilder.Append(c);
+            }
+            NumberOfDigitals = int.Parse(StrBuilder.ToString());
+            #endregion
+
 
         }
     }
