@@ -10,7 +10,10 @@ namespace COMTRADEParser
     {
         static void Main(string[] args)
         {
-
+            ConfigReader conf = new ConfigReader();
+            conf.Parse();
+            Console.ReadLine();
         }
     }
+    
 }
