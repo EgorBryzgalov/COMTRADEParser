@@ -8,6 +8,11 @@ using System.Globalization;
 
 namespace COMTRADEParser
 {
+    enum DataType
+    {
+        BINARY,
+        ASCII
+    }
     class ConfigReader
     {
         public int NumberOfChannels { get; set; }
@@ -23,6 +28,14 @@ namespace COMTRADEParser
         public int GridFrequency { get; set; }
 
         public int SampleRate { get; set; }
+
+        public DateTime BeginTime { get; set; }
+
+        public DateTime TripTime { get; set; }
+
+        public DataType dataType { get; set; }
+
+        public int TimeMultiplyer { get; set; }
 
         public ConfigReader()
         {
@@ -118,7 +131,22 @@ namespace COMTRADEParser
 
             string[] SmplRate = lines[LineNum++].Split(',');
             SampleRate = int.Parse(SmplRate[0]);
+
+            BeginTime = DateTime.Parse(lines[LineNum++]);
+            TripTime = DateTime.Parse(lines[LineNum++]);
+
+            if (lines[LineNum] == "BINARY")
+                dataType = DataType.BINARY;
+            else if (lines[LineNum] == "ASCII")
+                dataType = DataType.ASCII;
+            else
+                throw new InvalidDataException("Неверный тип представления данных (допускается BINARY или ASCII");
+            LineNum++;
+
+            TimeMultiplyer = int.Parse(lines[LineNum]);
             
+
+
 
 
         }
