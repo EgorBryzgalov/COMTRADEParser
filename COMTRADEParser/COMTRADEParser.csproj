@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="Channel.cs" />
     <Compile Include="ConfigReader.cs" />
+    <Compile Include="DataReader.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
